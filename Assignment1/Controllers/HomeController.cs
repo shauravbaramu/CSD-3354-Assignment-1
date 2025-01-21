@@ -7,7 +7,7 @@ namespace Assignment1.Controllers
     public class HomeController : Controller
     {
 
-        // List to temporarily store user data (no database used)
+        // List to temporarily store user data 
         private static List<User> Users = new List<User>();
 
 
