@@ -18,25 +18,25 @@ namespace Assignment1.Controllers
             _logger = logger;
         }
 
+        [HttpGet]
         //Home page with signup form
         public IActionResult Index()
         {
             return View();
         }
         [HttpPost]
-        [HttpPost]
-        public IActionResult Signup(User user, string confirmPassword)
+        public IActionResult Signup(User user)
         {
-            if (user.Password == confirmPassword)
+            if (user.isPasswordConfirmed())
             {
                 // Add the user to the list
                 Users.Add(user);
 
-                ViewBag.Message = "Registration has been successfully completed";
+                ViewBag.Success = "Registration has been successfully completed.";
             }
             else
             {
-                ViewBag.Message = "Password and confirmation do not match";
+                ViewBag.Error = "Password and confirmation do not match.";
             }
             return View("Index");
         }
@@ -53,22 +53,28 @@ namespace Assignment1.Controllers
         public IActionResult Login(string email, string password)
         {
             // Check if the user exists in the list
-            var user = Users.FirstOrDefault(u => u.Email == email && u.Password == password);
-            if (user != null)
+            User? userData = null;
+            foreach (var user in Users)
             {
-                TempData["UserName"] = user.FirstName; // Pass user's name to the welcome page
+                if (user.Email == email && user.Password == password)
+                {
+                    userData = user;
+                }
+
+            }
+            if (userData != null)
+            {
                 return RedirectToAction("Welcome");
             }
             else
             {
-                ViewBag.Message = "Invalid email or password. Please try again.";
+                ViewBag.Error = "Invalid email or password. Please try again.";
                 return View();
             }
         }
 
         public IActionResult Welcome()
         {
-            ViewBag.UserName = TempData["UserName"];
             return View();
         }
         public IActionResult Privacy()

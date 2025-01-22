@@ -1,32 +1,55 @@
-﻿@model Assignment1.Models.User
+@model Assignment1.Models.User
 
 @{
     ViewData["Title"] = "Signup";
 }
 
-<h1>Signup</h1>
-<form asp-action="Signup" method="post">
-    <label>First Name:</label>
-    <input asp-for="FirstName" required /><br />
+@if (ViewBag.Success != null || ViewBag.Error != null)
+{
+    <div class="alert alert-@(ViewBag.Success != null ? "success" : "danger") alert-dismissible fade show" role="alert">
+        @(ViewBag.Success != null ? ViewBag.Success : ViewBag.Error)
+        <button type="button" class="close float-end bg-danger text-white" style="border-radius=" 50%" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 
-    <label>Last Name:</label>
-    <input asp-for="LastName" required /><br />
-
-    <label>Email:</label>
-    <input asp-for="Email" type="email" required /><br />
-
-    <label>Phone Number:</label>
-    <input asp-for="Phone" type="tel" required /><br />
-
-    <label>Password:</label>
-    <input asp-for="Password" type="password" required /><br />
-
-    <label>Confirm Password:</label>
-    <input name="confirmPassword" type="password" required /><br />
-
-    <button type="submit">Signup</button>
-</form>
-
-<p style="color: green;">@ViewBag.Message</p>
-
-<p><a asp-action="Login">Already have an account? Login here</a></p>
+<div class="container text-center w-25">
+    <div class="card">
+        <h5 class="card-header bg-primary text-white">
+            <card-title>Signup</card-title>
+        </h5>
+        <form asp-action="Signup" method="post">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 my-2">
+                        <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="email" class="form-control" asp-for="Email" placeholder="Email" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="text" class="form-control" asp-for="Phone" placeholder="Phone" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="Password" class="form-control" asp-for="Password" placeholder="Password" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="Password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" required />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                    <input type="reset" value="Clear" class="btn btn-sm btn-outline-secondary" />
+                </div><br />
+                <p>Already have an account? <a asp-action="Login">Login here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</div>

@@ -1,16 +1,41 @@
-﻿@{
+@{
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
-<form asp-action="Login" method="post">
-    <label>Email:</label>
-    <input type="email" name="email" required /><br />
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        @ViewBag.Error
+        <button type="button" class="close float-end bg-danger text-white" style="border-radius=" 50%" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+}
 
-    <label>Password:</label>
-    <input type="password" name="password" required /><br />
-
-    <button type="submit">Login</button>
-</form>
-
-<p style="color: red;">@ViewBag.Message</p>
+<div class="container text-center w-25 mh-100">
+    <div class="card">
+        <h5 class="card-header bg-primary text-white">
+            <card-title>Login</card-title>
+        </h5>
+        <form asp-action="Login" method="post">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 my-2">
+                        <input type="email" class="form-control" name="email" placeholder="Email" required />
+                    </div>
+                    <div class="col-md-12 my-2">
+                        <input type="Password" class="form-control" name="password" placeholder="Password" required />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-between">
+                    <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+                    <input type="reset" value="Clear" class="btn btn-sm btn-outline-secondary" />
+                </div><br />
+                <p>Not a member? <a asp-action="Index">Register here</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
