@@ -27,7 +27,7 @@ namespace Assignment1.Controllers
         [HttpPost]
         public IActionResult Signup(User user)
         {
-            if (user.isPasswordConfirmed())
+            if (ModelState.IsValid)
             {
                 // Add the user to the list
                 Users.Add(user);
@@ -36,7 +36,7 @@ namespace Assignment1.Controllers
             }
             else
             {
-                ViewBag.Error = "Password and confirmation do not match.";
+                ViewBag.Error = "Error! There are some validation errors.";
             }
             return View("Index");
         }
