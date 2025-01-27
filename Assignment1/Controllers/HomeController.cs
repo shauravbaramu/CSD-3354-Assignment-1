@@ -27,6 +27,12 @@ namespace Assignment1.Controllers
         [HttpPost]
         public IActionResult Signup(User user)
         {
+            if (user.Password.Length < 6)
+            {
+                ViewBag.Error = "Password must contain at least 6 characters.";
+                return View("Index");
+            }
+
             if (user.isPasswordConfirmed())
             {
                 // Add the user to the list
