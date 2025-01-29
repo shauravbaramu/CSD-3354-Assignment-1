@@ -28,27 +28,18 @@ namespace Assignment1.Controllers
         //Signup page with signup form
         public IActionResult Signup(User user)
         {
-            if (user.isPasswordConfirmed() && user.passwordValidation())
+            if(ModelState.IsValid)
             {
                 // Adding user to the list
                 Users.Add(user);
 
                 ViewBag.Success = "Registration has been successfully completed.";
-            }
-            else if (!user.requiredValidation())
-            {
-                ViewBag.Error = "Error! Some required fields are empty.";
-            }
-            else if (!user.passwordValidation())
-            {
-                ViewBag.Error = "Password length must be greater than 6";
-            }
-            else if (!user.isPasswordConfirmed())
-            {
-                ViewBag.Error = "Password and Confirm password don't match!";
-            }
 
-            return View("Index");
+                return View("Index", new User());
+            }
+            
+
+            return View("Index", user);
         }
 
 

@@ -5,15 +5,21 @@ namespace Assignment1.Models
 {
     public class User
     {
+        [Required]
         // User model with required fields
         public string FirstName { get; set; }
-        
+
+        [Required]
         public string LastName { get; set; }
-        
+
+        [Required]
         public string Email { get; set; }
-       
+
+        [Required]
+        [StringLength(20, MinimumLength = 6, ErrorMessage = "Password must be at least 6 and less than 20.")]
         public string Password { get; set; }
 
+        [Required, Compare("Password", ErrorMessage = "Password and Confirm Message doesn't match.")]
         public string ConfirmPassword { get; set; }
         public string? Phone { get; set; }
 
@@ -29,19 +35,7 @@ namespace Assignment1.Models
             }
         }
 
-        // Method to check if password and confirm password are same
-        public bool isPasswordConfirmed()
-        {
-            return Password == ConfirmPassword ? true : false;
-        }
-
-        // Method to check if password length is greater than 6
-        public bool passwordValidation()
-        {
-            return Password.Length > 6 ? true : false;
-        }
-
-        //method to check if the credentials match
+        
         public User? isCredentialMatch(List<User> Users)
         {
             foreach (var user in Users)
