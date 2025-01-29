@@ -4,6 +4,7 @@
 
 @model Assignment1.Models.User
 
+<!-- Show error message if the user credentials do not match -->
 @if (ViewBag.Error != null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
@@ -14,30 +15,44 @@
     </div>
 }
 
+<!-- Login Form Container -->
 <div class="container text-center w-25 mh-100">
     <div class="card">
+        <!-- Card Header -->
         <h5 class="card-header bg-primary text-white">
             <card-title>Login</card-title>
         </h5>
+
+        <!-- Login Form -->
         <form asp-action="Login" method="post">
             <div class="card-body">
                 <div class="row">
+                    <!-- Email Input Field -->
                     <div class="col-md-12 my-2">
                         <input type="email" class="form-control" asp-for="Email" placeholder="Email" required />
                     </div>
+
+                    <!-- Password Input Field -->
                     <div class="col-md-12 my-2">
                         <input type="password" class="form-control" asp-for="Password" placeholder="Password" required />
                     </div>
                 </div>
             </div>
+
+            <!-- Card Footer with Buttons -->
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
+                    <!-- Submit Button -->
                     <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+
+                    <!-- Reset Button -->
                     <input type="reset" value="Clear" class="btn btn-sm btn-outline-secondary" />
-                </div><br />
+                </div>
+                <br />
+
+                <!-- Link to Registration Page -->
                 <p>Not a member? <a asp-action="Index">Register here</a></p>
             </div>
         </form>
     </div>
-</div>
 </div>

@@ -25,11 +25,12 @@ namespace Assignment1.Controllers
             return View();
         }
         [HttpPost]
+        //Signup page with signup form
         public IActionResult Signup(User user)
         {
             if (user.isPasswordConfirmed() && user.passwordValidation())
             {
-                // Add the user to the list
+                // Adding user to the list
                 Users.Add(user);
 
                 ViewBag.Success = "Registration has been successfully completed.";
@@ -52,12 +53,14 @@ namespace Assignment1.Controllers
 
 
         [HttpGet]
+        
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        //Login page with login form
         public IActionResult Login(User user)
         {
             if(user.isCredentialMatch(Users) != null)
@@ -70,6 +73,7 @@ namespace Assignment1.Controllers
             
         }
 
+        
         public IActionResult Privacy()
         {
             return View();

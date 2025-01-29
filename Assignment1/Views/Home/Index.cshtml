@@ -4,6 +4,7 @@
     ViewData["Title"] = "Signup";
 }
 
+<!-- Display success or error messages -->
 @if (ViewBag.Success != null || ViewBag.Error != null)
 {
     <div class="alert alert-@(ViewBag.Success != null ? "success" : "danger") alert-dismissible fade show" role="alert">
@@ -14,43 +15,65 @@
     </div>
 }
 
+<!-- Signup Form Container -->
 <div class="container text-center w-25">
     <div class="card">
+        <!-- Card Header -->
         <h5 class="card-header bg-primary text-white">
             <card-title>Signup</card-title>
         </h5>
+
+        <!-- Signup Form -->
         <form asp-action="Signup" method="post">
             <div class="card-body">
                 <div class="row">
+                    <!-- First Name Input -->
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" required />
                     </div>
+
+                    <!-- Last Name Input -->
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" required />
                     </div>
+
+                    <!-- Email Input -->
                     <div class="col-md-12 my-2">
                         <input type="email" class="form-control" asp-for="Email" placeholder="Email" required />
                     </div>
+
+                    <!-- Phone Input -->
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="Phone" placeholder="Phone" required />
                     </div>
+
+                    <!-- Password Input -->
                     <div class="col-md-12 my-2">
                         <input type="Password" class="form-control" asp-for="Password" placeholder="Password" required />
                     </div>
+
+                    <!-- Confirm Password Input -->
                     <div class="col-md-12 my-2">
                         <input type="Password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" required />
                         <span class="text-danger" asp-validation-for="ConfirmPassword"></span>
                     </div>
                 </div>
             </div>
+
+            <!-- Card Footer with Buttons -->
             <div class="card-footer">
                 <div class="d-flex justify-content-between">
+                    <!-- Submit Button -->
                     <input type="submit" value="Submit" class="btn btn-sm btn-primary" />
+
+                    <!-- Reset Button -->
                     <input type="reset" value="Clear" class="btn btn-sm btn-outline-secondary" />
-                </div><br />
+                </div>
+                <br />
+
+                <!-- Link to Login Page -->
                 <p>Already have an account? <a asp-action="Login">Login here</a></p>
             </div>
         </form>
     </div>
-</div>
 </div>
