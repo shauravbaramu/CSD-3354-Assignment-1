@@ -34,10 +34,6 @@ namespace Assignment1.Controllers
 
                 ViewBag.Success = "Registration has been successfully completed.";
             }
-            else
-            {
-                ViewBag.Error = "Error! There are some validation errors.";
-            }
             return View("Index");
         }
 
