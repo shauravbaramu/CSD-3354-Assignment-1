@@ -8,8 +8,7 @@
 {
     <div class="alert alert-@(ViewBag.Success != null ? "success" : "danger") alert-dismissible fade show" role="alert">
         @(ViewBag.Success != null ? ViewBag.Success : ViewBag.Error)
-        <button type="button" class="close float-end bg-danger text-white" style="border-radius=" 50%" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close">
         </button>
     </div>
 }
@@ -19,23 +18,27 @@
         <h5 class="card-header bg-primary text-white">
             <card-title>Signup</card-title>
         </h5>
-        <form asp-action="Signup" method="post">
+        <form asp-action="Index" method="post">
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="FirstName" placeholder="First Name" required />
+                        <span class="text-danger" asp-validation-for="FirstName"></span>
                     </div>
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="LastName" placeholder="Last Name" required />
+                        <span class="text-danger" asp-validation-for="LastName"></span>
                     </div>
                     <div class="col-md-12 my-2">
                         <input type="email" class="form-control" asp-for="Email" placeholder="Email" required />
+                        <span class="text-danger" asp-validation-for="Email"></span>
                     </div>
                     <div class="col-md-12 my-2">
                         <input type="text" class="form-control" asp-for="Phone" placeholder="Phone" required />
                     </div>
                     <div class="col-md-12 my-2">
                         <input type="Password" class="form-control" asp-for="Password" placeholder="Password" required />
+                        <span class="text-danger" asp-validation-for="Password"></span>
                     </div>
                     <div class="col-md-12 my-2">
                         <input type="Password" class="form-control" asp-for="ConfirmPassword" placeholder="Confirm Password" required />
