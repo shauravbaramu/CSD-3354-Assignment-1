@@ -1,28 +1,54 @@
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.ComponentModel.DataAnnotations;
 
 namespace Assignment1.Models
 {
     public class User
     {
-        [Required]
+
         public string FirstName { get; set; }
-        [Required]
+        
         public string LastName { get; set; }
-        [Required]
+        
         public string Email { get; set; }
-        [Required]
+       
         public string Password { get; set; }
 
-        [Required, Compare("Password", ErrorMessage = "Password and Confirm password doesn't match!"), StringLength(20, MinimumLength = 6, ErrorMessage = "Password length must me greater than 6 and less than 20")]
         public string ConfirmPassword { get; set; }
         public string? Phone { get; set; }
 
-        //public bool isPasswordConfirmed()
-        //{
-        //    bool passwordConfirmed = Password == ConfirmPassword ? true : false;
+        public bool requiredValidation()
+        {
+            if(string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Email))
+            {
+                return false;
+            } else
+            {
+                return true;
+            }
+        }
 
-        //    return passwordConfirmed;
-        //}
+        public bool isPasswordConfirmed()
+        {
+            return Password == ConfirmPassword ? true : false;
+        }
+
+        public bool passwordValidation()
+        {
+            return Password.Length > 6 ? true : false;
+        }
+
+        public User? isCredentialMatch(List<User> Users)
+        {
+            foreach (var user in Users)
+            {
+                if (user.Email == Email && user.Password == Password)
+                {
+                    return user;
+                }
+            }
+            return null;
+        }
 
     }
 }

@@ -27,52 +27,49 @@ namespace Assignment1.Controllers
         [HttpPost]
         public IActionResult Signup(User user)
         {
-            if (ModelState.IsValid)
+            if (user.isPasswordConfirmed() && user.passwordValidation())
             {
                 // Add the user to the list
                 Users.Add(user);
 
                 ViewBag.Success = "Registration has been successfully completed.";
             }
+            else if (!user.requiredValidation())
+            {
+                ViewBag.Error = "Error! Some required fields are empty.";
+            }
+            else if (!user.passwordValidation())
+            {
+                ViewBag.Error = "Password length must be greater than 6";
+            }
+            else if (!user.isPasswordConfirmed())
+            {
+                ViewBag.Error = "Password and Confirm password don't match!";
+            }
+
             return View("Index");
         }
 
 
+        [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-
-
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(User user)
         {
-            // Check if the user exists in the list
-            User? userData = null;
-            foreach (var user in Users)
+            if(user.isCredentialMatch(Users) != null)
             {
-                if (user.Email == email && user.Password == password)
-                {
-                    userData = user;
-                }
-
+                return View("Welcome");
             }
-            if (userData != null)
-            {
-                return RedirectToAction("Welcome");
-            }
-            else
-            {
-                ViewBag.Error = "Invalid email or password. Please try again.";
-                return View();
-            }
-        }
-
-        public IActionResult Welcome()
-        {
+            
+            ViewBag.Error = "Invalid email or password. Please try again.";
             return View();
+            
         }
+
         public IActionResult Privacy()
         {
             return View();
