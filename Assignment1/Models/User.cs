@@ -23,6 +23,7 @@ namespace Assignment1.Models
         public string ConfirmPassword { get; set; }
         public string? Phone { get; set; }
         
+        // Method to check if the credentials match
         public User? isCredentialMatch(List<User> Users)
         {
             foreach (var user in Users)
