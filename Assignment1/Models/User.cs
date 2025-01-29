@@ -22,19 +22,6 @@ namespace Assignment1.Models
         [Required, Compare("Password", ErrorMessage = "Password and Confirm Message doesn't match.")]
         public string ConfirmPassword { get; set; }
         public string? Phone { get; set; }
-
-        // Method to check if required fields are empty
-        public bool requiredValidation()
-        {
-            if(string.IsNullOrEmpty(FirstName) || string.IsNullOrEmpty(LastName) || string.IsNullOrEmpty(Email))
-            {
-                return false;
-            } else
-            {
-                return true;
-            }
-        }
-
         
         public User? isCredentialMatch(List<User> Users)
         {
